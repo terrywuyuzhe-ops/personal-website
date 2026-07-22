@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Personal website of Terry Wu, a future business student exploring data analytics, marketing, and artificial intelligence."
+  />
+  <title>Terry Wu | Personal Website</title>
+
+  <style>
+    :root {
+      --deep-ocean: #164e63;
+      --ocean: #0e7490;
+      --sea: #0891b2;
+      --aqua: #67e8f9;
+      --mist: #cffafe;
+      --foam: #ecfeff;
+      --sand: #f8fafc;
+      --white: #ffffff;
+      --text: #15323c;
+      --muted: #58717a;
+      --border: rgba(14, 116, 144, 0.16);
+      --shadow: 0 20px 55px rgba(15, 75, 92, 0.12);
+      --shadow-soft: 0 12px 30px rgba(15, 75, 92, 0.08);
+      --radius-large: 30px;
+      --radius-medium: 20px;
+      --radius-small: 14px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 5%, rgba(103, 232, 249, 0.23), transparent 28%),
+        radial-gradient(circle at 92% 18%, rgba(34, 211, 238, 0.16), transparent 26%),
+        linear-gradient(180deg, #f5feff 0%, #ffffff 45%, #f2fbfc 100%);
+      font-family:
+        Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    ::selection {
+      color: var(--deep-ocean);
+      background: var(--mist);
+    }
+
+    .background-shape {
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(4px);
+      pointer-events: none;
+    }
+
+    .background-shape.one {
+      top: 120px;
+      left: -130px;
+      width: 320px;
+      height: 320px;
+      background: rgba(103, 232, 249, 0.15);
+    }
+
+    .background-shape.two {
+      right: -140px;
+      bottom: 80px;
+      width: 390px;
+      height: 390px;
+      background: rgba(8, 145, 178, 0.1);
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 92px 0;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 16px;
+      color: var(--ocean);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .section-label::before {
+      width: 24px;
+      height: 2px;
+      content: "";
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--sea), var(--aqua));
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--deep-ocean);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.14;
+      letter-spacing: -0.035em;
+    }
+
+    .section-intro {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1000;
+      border-bottom: 1px solid transparent;
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .navbar.scrolled {
+      border-color: var(--border);
+      background: rgba(245, 254, 255, 0.88);
+      box-shadow: 0 8px 28px rgba(15, 75, 92, 0.07);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .nav-content {
+      display: flex;
+      min-height: 76px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--deep-ocean);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--white);
+      background: linear-gradient(145deg, var(--ocean), var(--sea));
+      box-shadow: 0 10px 22px rgba(8, 145, 178, 0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      padding: 9px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 650;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--deep-ocean);
+      background: rgba(103, 232, 249, 0.18);
+    }
+
+    .nav-links a:hover {
+      transform: translateY(-1px);
+    }
+
+    .menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .menu-button span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 5px auto;
+      border-radius: 999px;
+      background: var(--deep-ocean);
+      transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    .menu-button.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-button.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-button.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .hero {
+      display: grid;
+      min-height: 100vh;
+      padding: 125px 0 70px;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      align-items: center;
+      gap: 72px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(310px, 0.8fr);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--ocean);
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    .hero-badge::before {
+      width: 9px;
+      height: 9px;
+      content: "";
+      border-radius: 50%;
+      background: var(--sea);
+      box-shadow: 0 0 0 5px rgba(8, 145, 178, 0.12);
+    }
+
+    .hero h1 {
+      max-width: 770px;
+      margin-bottom: 24px;
+      color: var(--deep-ocean);
+      font-size: clamp(3.2rem, 8vw, 6.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-top: 10px;
+      color: var(--ocean);
+      font-size: 0.43em;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-description {
+      max-width: 700px;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: clamp(1.04rem, 2vw, 1.2rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border: 1px solid transparent;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 750;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--ocean), var(--sea));
+      box-shadow: 0 15px 28px rgba(8, 145, 178, 0.24);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 18px 34px rgba(8, 145, 178, 0.3);
+    }
+
+    .button-secondary {
+      border-color: var(--border);
+      color: var(--deep-ocean);
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .button-secondary:hover {
+      background: var(--white);
+    }
+
+    .hero-visual {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 510px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 42px;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .photo-frame {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      min-height: 482px;
+      border-radius: 31px;
+      background:
+        linear-gradient(145deg, rgba(207, 250, 254, 0.9), rgba(103, 232, 249, 0.4)),
+        var(--mist);
+    }
+
+    .profile-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 482px;
+      object-fit: cover;
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 30px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.95), transparent 22%),
+        linear-gradient(145deg, #d8fbff, #a5edf5);
+    }
+
+    .photo-placeholder.visible {
+      display: grid;
+    }
+
+    .placeholder-content {
+      display: grid;
+      justify-items: center;
+      gap: 18px;
+    }
+
+    .placeholder-avatar {
+      display: grid;
+      width: 150px;
+      height: 150px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      color: var(--ocean);
+      background: rgba(255, 255, 255, 0.62);
+      box-shadow: 0 20px 40px rgba(15, 75, 92, 0.12);
+      font-size: 4rem;
+      font-weight: 800;
+    }
+
+    .placeholder-content strong {
+      color: var(--deep-ocean);
+      font-size: 1.2rem;
+    }
+
+    .placeholder-content p {
+      max-width: 250px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .floating-card {
+      position: absolute;
+      z-index: 2;
+      padding: 15px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.87);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    .floating-card strong {
+      display: block;
+      color: var(--deep-ocean);
+      font-size: 0.94rem;
+    }
+
+    .floating-card span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .floating-card.top {
+      top: 35px;
+      right: -35px;
+      transform: rotate(-2deg);
+    }
+
+    .floating-card.bottom {
+      bottom: 45px;
+      left: -45px;
+      transform: rotate(-2deg);
+    }
+
+    .about-layout {
+      display: grid;
+      gap: 54px;
+      grid-template-columns: 0.72fr 1.28fr;
+    }
+
+    .about-highlight {
+      position: sticky;
+      top: 110px;
+      height: fit-content;
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(236, 254, 255, 0.82));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-highlight .quote-mark {
+      margin-bottom: 18px;
+      color: var(--aqua);
+      font-family: Georgia, serif;
+      font-size: 4.5rem;
+      line-height: 0.65;
+    }
+
+    .about-highlight p {
+      color: var(--deep-ocean);
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .about-copy p:first-child {
+      color: var(--text);
+      font-size: 1.16rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      margin-top: 42px;
+      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .skill-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 235px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      transition:
+        transform 0.24s ease,
+        box-shadow 0.24s ease,
+        border-color 0.24s ease;
+    }
+
+    .skill-card::after {
+      position: absolute;
+      right: -50px;
+      bottom: -60px;
+      width: 140px;
+      height: 140px;
+      content: "";
+      border-radius: 50%;
+      background: rgba(103, 232, 249, 0.13);
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(8, 145, 178, 0.3);
+      box-shadow: var(--shadow);
+      transform: translateY(-7px);
+    }
+
+    .skill-card:hover::after {
+      transform: scale(1.35);
+    }
+
+    .skill-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 22px;
+      place-items: center;
+      border-radius: 15px;
+      color: var(--ocean);
+      background: var(--mist);
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .skill-card h3 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 9px;
+      color: var(--deep-ocean);
+      font-size: 1.1rem;
+    }
+
+    .skill-card p {
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.62;
+    }
+
+    .skills-statement {
+      max-width: 850px;
+      margin-top: 32px;
+      padding: 28px 30px;
+      border-left: 4px solid var(--sea);
+      border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+      color: var(--muted);
+      background: rgba(207, 250, 254, 0.3);
+      font-size: 1.02rem;
+    }
+
+    .journey-wrapper {
+      margin-top: 42px;
+      padding: 40px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .journey-statement {
+      display: grid;
+      margin-bottom: 42px;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline::before {
+      position: absolute;
+      top: 16px;
+      bottom: 16px;
+      left: 18px;
+      width: 2px;
+      content: "";
+      background: linear-gradient(var(--aqua), var(--sea), var(--mist));
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      align-items: start;
+      gap: 22px;
+      grid-template-columns: 38px 1fr;
+    }
+
+    .timeline-dot {
+      position: relative;
+      z-index: 1;
+      width: 38px;
+      height: 38px;
+      border: 8px solid var(--foam);
+      border-radius: 50%;
+      background: var(--sea);
+      box-shadow: 0 0 0 1px rgba(8, 145, 178, 0.18);
+    }
+
+    .timeline-content {
+      padding: 6px 0 25px;
+    }
+
+    .timeline-content h3 {
+      margin-bottom: 5px;
+      color: var(--deep-ocean);
+      font-size: 1.04rem;
+    }
+
+    .timeline-content p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      padding: 54px;
+      border-radius: 34px;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 90% 10%, rgba(103, 232, 249, 0.35), transparent 24%),
+        linear-gradient(135deg, var(--deep-ocean), var(--ocean));
+      box-shadow: 0 25px 60px rgba(22, 78, 99, 0.25);
+      gap: 40px;
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .contact-card .section-label {
+      color: var(--aqua);
+    }
+
+    .contact-card .section-title {
+      margin-bottom: 14px;
+      color: var(--white);
+    }
+
+    .contact-card p {
+      max-width: 620px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .contact-box {
+      display: grid;
+      align-content: center;
+      gap: 12px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .contact-box small {
+      color: var(--aqua);
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .email-display {
+      overflow-wrap: anywhere;
+      color: var(--white);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      font-weight: 750;
+    }
+
+    .copy-button {
+      width: fit-content;
+      margin-top: 8px;
+      padding: 10px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 12px;
+      cursor: pointer;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
+      font-weight: 700;
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .copy-button:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      padding: 30px 0 38px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 0.65s ease,
+        transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .about-layout,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        gap: 50px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-inline: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-badge {
+        margin-inline: auto;
+      }
+
+      .hero-visual {
+        width: min(100%, 490px);
+        margin-inline: auto;
+      }
+
+      .photo-card {
+        transform: none;
+      }
+
+      .floating-card.top {
+        right: -15px;
+      }
+
+      .floating-card.bottom {
+        left: -15px;
+      }
+
+      .about-highlight {
+        position: static;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-card {
+        padding: 42px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 68px;
+        right: 14px;
+        left: 14px;
+        display: grid;
+        overflow: hidden;
+        max-height: 0;
+        padding: 0 12px;
+        border: 1px solid transparent;
+        border-radius: 20px;
+        opacity: 0;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: var(--shadow);
+        pointer-events: none;
+        transition:
+          max-height 0.3s ease,
+          padding 0.3s ease,
+          opacity 0.25s ease,
+          border-color 0.25s ease;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .nav-links.open {
+        max-height: 420px;
+        padding: 12px;
+        border-color: var(--border);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 120px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 16vw, 5.2rem);
+      }
+
+      .photo-card,
+      .photo-frame,
+      .profile-photo {
+        min-height: 430px;
+      }
+
+      .floating-card {
+        position: static;
+        width: fit-content;
+        margin-top: 14px;
+        transform: none !important;
+      }
+
+      .hero-visual {
+        display: grid;
+      }
+
+      .floating-card.top {
+        justify-self: end;
+      }
+
+      .journey-statement {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .about-highlight,
+      .journey-wrapper,
+      .contact-card {
+        padding: 27px;
+      }
+
+      .photo-card {
+        min-height: 390px;
+        padding: 10px;
+        border-radius: 28px;
+      }
+
+      .photo-frame,
+      .profile-photo {
+        min-height: 370px;
+        border-radius: 21px;
+      }
+
+      .placeholder-avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-shape one" aria-hidden="true"></div>
+  <div class="background-shape two" aria-hidden="true"></div>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-content">
+      <a class="logo" href="#home" aria-label="Go to home section">
+        <span class="logo-mark">TW</span>
+        <span>Terry Wu</span>
+      </a>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#journey">Journey</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-badge">International Student · Business & Technology</div>
+
+          <h1>
+            Wu Yuzhe
+            <span>Terry Wu</span>
+          </h1>
+
+          <p class="hero-description">
+            Future Business Student Exploring Data Analytics, Marketing, and AI.
+            I am interested in how business insight, creative thinking, and
+            technology can work together to solve meaningful problems.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#about">
+              Explore My Story
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a class="button button-secondary" href="#contact">
+              Contact Me
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="photo-card">
+            <div class="photo-frame">
+              <img
+                class="profile-photo"
+                id="profilePhoto"
+                src="photo.jpg"
+                alt="Portrait of Terry Wu"
+              />
+
+              <div class="photo-placeholder" id="photoPlaceholder" aria-hidden="true">
+                <div class="placeholder-content">
+                  <div class="placeholder-avatar">TW</div>
+                  <div>
+                    <strong>Profile Photo</strong>
+                    <p>
+                      Add a file named photo.jpg to the same folder as this HTML file.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-card top">
+            <strong>Curious Thinker</strong>
+            <span>Business · Data · AI</span>
+          </div>
+
+          <div class="floating-card bottom">
+            <strong>Creative Explorer</strong>
+            <span>Basketball · Video · Ideas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-label">About Me</div>
+
+        <div class="about-layout">
+          <aside class="about-highlight reveal">
+            <div class="quote-mark">“</div>
+            <p>
+              I want to understand how ideas, data, and technology can become
+              practical solutions that create real value.
+            </p>
+          </aside>
+
+          <div>
+            <h2 class="section-title reveal">
+              Curious about business, technology, and the decisions that shape our world.
+            </h2>
+
+            <div class="about-copy reveal">
+              <p>
+                Hi, I’m Terry Wu, an international high school student from China
+                with a strong interest in business, technology, and artificial
+                intelligence. I am especially curious about how data can reveal
+                patterns, improve decision-making, and help organizations better
+                understand the people they serve.
+              </p>
+
+              <p>
+                Through academic projects and the Cornell Summer Business & Data
+                Analytics Program, I have begun developing practical experience
+                with business analytics, Excel, Python, and AI tools. Beyond the
+                classroom, I enjoy basketball, video creation, and learning through
+                experimentation. I like asking thoughtful questions, examining
+                problems from different perspectives, and turning unfamiliar
+                challenges into opportunities to grow.
+              </p>
+
+              <p>
+                My long-term goal is to combine business knowledge, analytical
+                thinking, and emerging technology to create useful solutions,
+                communicate ideas effectively, and make a positive impact.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-label">Skills & Interests</div>
+
+        <h2 class="section-title reveal">
+          Developing a versatile foundation across analysis, creativity, and teamwork.
+        </h2>
+
+        <p class="section-intro reveal">
+          My current skills reflect both the subjects I am studying and the
+          activities that shape how I think, communicate, and solve problems.
+        </p>
+
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <div class="skill-icon">01</div>
+            <h3>Basketball</h3>
+            <p>
+              Building teamwork, discipline, adaptability, and fast decision-making
+              through competition and regular practice.
+            </p>
+          </article>
+
+          <article class="skill-card reveal">
+            <div class="skill-icon">02</div>
+            <h3>Python</h3>
+            <p>
+              Learning beginner-level programming concepts and using Python to
+              explore data, logic, and analytical problem-solving.
+            </p>
+          </article>
+
+          <article class="skill-card reveal">
+            <div class="skill-icon">03</div>
+            <h3>AI Tools</h3>
+            <p>
+              Experimenting with AI-assisted research, ideation, content creation,
+              and productivity while learning to evaluate results critically.
+            </p>
+          </article>
+
+          <article class="skill-card reveal">
+            <div class="skill-icon">04</div>
+            <h3>Video Editing</h3>
+            <p>
+              Turning ideas and experiences into clear visual stories through
+              editing, pacing, structure, and creative communication.
+            </p>
+          </article>
+        </div>
+
+        <div class="skills-statement reveal">
+          Together, these skills help me approach challenges from multiple angles.
+          Basketball has strengthened my teamwork and ability to respond under
+          pressure, while Python and AI tools are introducing me to structured,
+          data-informed problem-solving. Video editing adds a creative dimension,
+          helping me communicate ideas through visual storytelling. I am still at
+          an early stage in several of these areas, but I actively look for projects
+          that allow me to learn by doing.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="container">
+        <div class="section-label">Activities & Background</div>
+
+        <h2 class="section-title reveal">
+          Building experience through academic programs, projects, and personal exploration.
+        </h2>
+
+        <div class="journey-wrapper reveal">
+          <div class="journey-statement">
+            <p>
+              As an international high school student in China, I am building a
+              foundation that connects classroom learning with practical business
+              and technology applications. In 2026, I participated in the Cornell
+              Summer Business & Data Analytics Program, where I explored how data,
+              spreadsheets, programming, and business frameworks can support better
+              decisions.
+            </p>
+
+            <p>
+              I have also completed business analysis simulation projects and
+              continue to study Excel, Python, and business analytics independently.
+              My broader interests include artificial intelligence, marketing, and
+              entrepreneurship. Outside academics, basketball and video creation
+              give me additional ways to practice collaboration, creativity, and
+              self-expression.
+            </p>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-content">
+                <h3>International High School Student</h3>
+                <p>
+                  Studying in China while developing an international perspective
+                  on business, technology, and education.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-content">
+                <h3>Cornell Summer Program · 2026</h3>
+                <p>
+                  Participated in the Business & Data Analytics Program and gained
+                  exposure to analytical tools and business decision-making.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-content">
+                <h3>Business Analysis Simulations</h3>
+                <p>
+                  Completed simulation-based projects involving strategy, market
+                  decisions, teamwork, and interpretation of business results.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-content">
+                <h3>Current Learning</h3>
+                <p>
+                  Continuing to develop skills in Excel, Python, business analytics,
+                  AI, marketing, entrepreneurship, and video production.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div>
+            <div class="section-label">Contact</div>
+            <h2 class="section-title">
+              Let’s connect and exchange ideas.
+            </h2>
+            <p>
+              I am interested in learning opportunities, collaborative projects,
+              and conversations about business, data analytics, marketing,
+              technology, and creative work.
+            </p>
+          </div>
+
+          <div class="contact-box">
+            <small>Email</small>
+            <div class="email-display" id="emailText">
+              terrywuyuzhe@gmail.com
+            </div>
+            <button class="copy-button" id="copyButton" type="button">
+              Copy Email
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="currentYear"></span> Terry Wu. Designed with curiosity and purpose.
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById("navbar");
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+    const navAnchors = [...document.querySelectorAll(".nav-links a")];
+    const sections = [...document.querySelectorAll("main section[id]")];
+    const profilePhoto = document.getElementById("profilePhoto");
+    const photoPlaceholder = document.getElementById("photoPlaceholder");
+    const copyButton = document.getElementById("copyButton");
+    const emailText = document.getElementById("emailText");
+    const currentYear = document.getElementById("currentYear");
+
+    currentYear.textContent = new Date().getFullYear();
+
+    function updateNavbar() {
+      navbar.classList.toggle("scrolled", window.scrollY > 20);
+    }
+
+    updateNavbar();
+    window.addEventListener("scroll", updateNavbar, { passive: true });
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.classList.toggle("open", isOpen);
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navAnchors.forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      const clickedInsideNav =
+        navLinks.contains(event.target) || menuButton.contains(event.target);
+
+      if (!clickedInsideNav) {
+        navLinks.classList.remove("open");
+        menuButton.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    function showPhotoPlaceholder() {
+      profilePhoto.style.display = "none";
+      photoPlaceholder.classList.add("visible");
+      photoPlaceholder.setAttribute("aria-hidden", "false");
+    }
+
+    profilePhoto.addEventListener("error", showPhotoPlaceholder);
+
+    if (profilePhoto.complete && profilePhoto.naturalWidth === 0) {
+      showPhotoPlaceholder();
+    }
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (!visibleSections.length) return;
+
+        const activeId = visibleSections[0].target.id;
+
+        navAnchors.forEach((link) => {
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") === `#${activeId}`
+          );
+        });
+      },
+      {
+        rootMargin: "-25% 0px -60% 0px",
+        threshold: [0.05, 0.2, 0.5]
+      }
+    );
+
+    sections.forEach((section) => sectionObserver.observe(section));
+
+    copyButton.addEventListener("click", async () => {
+      const email = emailText.textContent.trim();
+      const originalText = copyButton.textContent;
+
+      try {
+        await navigator.clipboard.writeText(email);
+        copyButton.textContent = "Email Copied";
+      } catch (error) {
+        const temporaryInput = document.createElement("textarea");
+        temporaryInput.value = email;
+        temporaryInput.setAttribute("readonly", "");
+        temporaryInput.style.position = "fixed";
+        temporaryInput.style.opacity = "0";
+        document.body.appendChild(temporaryInput);
+        temporaryInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(temporaryInput);
+        copyButton.textContent = "Email Copied";
+      }
+
+      window.setTimeout(() => {
+        copyButton.textContent = originalText;
+      }, 1800);
+    });
+  </script>
+</body>
+</html>
